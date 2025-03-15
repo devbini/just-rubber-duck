@@ -3,6 +3,7 @@
   "displayName": "Just Rubber Duck",
   "description": "",
   "version": "0.0.1",
+  "publisher": "devbini",
   "engines": {
     "vscode": "^1.98.0"
   },
