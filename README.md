@@ -1,71 +1,38 @@
-# just-rubber-duck README
+# ✨ Quack Quack! 오로지 러버덕!
+## Just Rubber Duck README
+당신의 러버덕 디버깅을 도와줄 심플한 러버덕 확장 프로그램!
 
-This is the README for your extension "just-rubber-duck". After writing up a brief description, we recommend including the following sections.
+### 사용법
+- `Ctrl + Shift + P` 를 입력하여 터미널 창을 열고,  
+**`I want to Rubber-Duck!`** 을 입력합니다. 
 
-## Features
+- 그게 끝입니다. 이제 귀여운 러버덕이 당신의 에디터에서 춤을 출 겁니다.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### 기여
+- 새로운 기능, 새로운 이미지등에 대한 피드백이 있는 경우, just-rubber-duck 리포지토리에서 이슈를 만들어주세요.  
+개발자가 이를 보고 수정할 수 있습니다.  <br/><br/>
 
-For example if there is an image subfolder under your extension project workspace:
+> **즐겨주세요!**  
+![image](https://github.com/user-attachments/assets/835b2da3-7b51-469c-a1cb-0769ec9e9568)
 
-\!\[feature X\]\(images/feature-x.png\)
+<br/><br/>
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+# ✨ Quack Quack! Just Rubber Duck!
 
-## Requirements
+## Just Rubber Duck ReadMe 
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### Usage
+- Open a terminal window by typing `Ctrl + Shift + P`,  
+and type **`I want to Rubber-Duck!`**.
 
-## Extension Settings
+- That's it. Now a cute rubber duck will dance in your editor.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+### Contribute
+- If you have feedback on new features, new images, etc.,  
+please create an issue in the just-rubber-duck repository.
 
-For example:
+The developers can see and fix it.
 
-This extension contributes the following settings:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Enjoy!  
+![image](https://github.com/user-attachments/assets/835b2da3-7b51-469c-a1cb-0769ec9e9568)
