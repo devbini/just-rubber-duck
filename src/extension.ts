@@ -1,26 +1,104 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+let installUri: vscode.Uri;
+
 export function activate(context: vscode.ExtensionContext) {
+  installUri = context.extensionUri;
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "just-rubber-duck" is now active!');
+  // 테마별 배경 색 설정 (Sync vscode Theme)
+  const activeTheme = vscode.window.activeColorTheme;
+  let bgColor = "#1e1e1e";
+  if (activeTheme.kind === vscode.ColorThemeKind.Light) {
+    bgColor = "#ffffff";
+  } else if (activeTheme.kind === vscode.ColorThemeKind.HighContrast) {
+    bgColor = "#000000";
+  }
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('just-rubber-duck.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Just Rubber Duck!');
-	});
+  const duckProvider = new RubberDuckProvider(bgColor);
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(
+      RubberDuckProvider.viewType,
+      duckProvider
+    )
+  );
 
-	context.subscriptions.push(disposable);
+  // 커맨드 등록
+  const openDuckCommand = vscode.commands.registerCommand(
+    "extension.openRubberDuckView",
+    async () => {
+      await vscode.commands.executeCommand("rubberduck_view.focus");
+    }
+  );
+  context.subscriptions.push(openDuckCommand);
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
+
+class RubberDuckProvider implements vscode.WebviewViewProvider {
+  public static readonly viewType = "rubberduck_view";
+  private webviewView?: vscode.WebviewView;
+
+  constructor(private backgroundColor: string) {}
+
+  public resolveWebviewView(
+    view: vscode.WebviewView,
+    _context: vscode.WebviewViewResolveContext,
+    _token: vscode.CancellationToken
+  ) {
+    this.webviewView = view;
+    view.webview.options = {
+      enableScripts: true,
+      localResourceRoots: [vscode.Uri.joinPath(installUri, "resource")],
+    };
+
+    const duckImagePath = vscode.Uri.joinPath(
+      installUri,
+      "resource",
+      "rubberduck.png"
+    );
+    const duckImageUri = view.webview.asWebviewUri(duckImagePath);
+
+    view.webview.html = this.generateHTML(duckImageUri, this.backgroundColor);
+  }
+
+  private generateHTML(duckUri: vscode.Uri, bgColor: string): string {
+    return `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="Content-Security-Policy"
+                content="default-src 'none'; img-src ${duckUri.scheme}://*; style-src 'unsafe-inline'; script-src 'none';">
+          <style>
+              html, body {
+                  margin: 0;
+                  padding: 0;
+                  width: 100%;
+                  height: 100%;
+                  background-color: ${bgColor};
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+              }
+              img {
+                  max-width: 90%;
+                  max-height: 90%;
+                  animation: waddle 1s infinite ease-in-out;
+                  transform-origin: bottom center;
+              }
+              @keyframes waddle {
+                  0%   { transform: rotate(0deg); }
+                  25%  { transform: rotate(-2deg); }
+                  50%  { transform: rotate(0deg); }
+                  75%  { transform: rotate(2deg); }
+                  100% { transform: rotate(0deg); }
+              }
+          </style>
+      </head>
+      <body>
+          <img src="${duckUri}" alt="Rubber Duck">
+      </body>
+      </html>
+    `;
+  }
+}

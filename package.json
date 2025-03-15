@@ -14,10 +14,28 @@
   "contributes": {
     "commands": [
       {
-        "command": "just-rubber-duck.helloWorld",
-        "title": "Hello World"
+        "command": "extension.openRubberDuckView",
+        "title": "I want to see Rubber-Duck!"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "duckContainer",
+          "title": "Rubber Duck",
+          "icon": "media/rubberduck.svg"
+        }
+      ]
+    },
+    "views": {
+      "duckContainer": [
+        {
+          "type": "webview",
+          "id": "rubberduck_view",
+          "name": "\u200B"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
