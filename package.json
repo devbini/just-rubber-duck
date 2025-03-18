@@ -1,8 +1,8 @@
 {
   "name": "just-rubber-duck",
   "displayName": "Just Rubber Duck",
-  "description": "",
-  "version": "0.0.1",
+  "description": "Rubber Duck Provides a rubber duck debugging.",
+  "version": "0.0.2",
   "publisher": "devbini",
   "engines": {
     "vscode": "^1.98.0"
@@ -10,9 +10,10 @@
   "categories": [
     "Other"
   ],
+  "icon": "resource/rubberduck.png",
   "repository": {
-  "type": "git",
-  "url": "https://github.com/devbini/just-rubber-duck.git"
+    "type": "git",
+    "url": "https://github.com/devbini/just-rubber-duck.git"
   },
   "bugs": {
     "url": "https://github.com/devbini/just-rubber-duck/issues"
@@ -33,7 +34,7 @@
         {
           "id": "duckContainer",
           "title": "Rubber Duck",
-          "icon": "media/rubberduck.svg"
+          "icon": "resource/rubberduck.svg"
         }
       ]
     },
@@ -42,7 +43,7 @@
         {
           "type": "webview",
           "id": "rubberduck_view",
-          "name": "\u200B"
+          "name": "​"
         }
       ]
     }
@@ -56,14 +57,18 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.98.0",
+    "@types/assert": "^1.5.11",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
+    "@types/vscode": "^1.98.0",
     "@typescript-eslint/eslint-plugin": "^8.25.0",
     "@typescript-eslint/parser": "^8.25.0",
-    "eslint": "^9.21.0",
-    "typescript": "^5.7.3",
     "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.21.0",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "just-rubber-duck": "file:"
   }
 }
