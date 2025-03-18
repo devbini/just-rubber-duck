@@ -4,7 +4,7 @@
 
 ### 사용법
 - `Ctrl + Shift + P` 를 입력하여 터미널 창을 열고,  
-**`I want to Rubber-Duck!`** 을 입력합니다. 
+**`I want to see Rubber-Duck!`** 을 입력합니다. 
 
 - 그게 끝입니다. 이제 귀여운 러버덕이 당신의 에디터에서 춤을 출 겁니다.
 
@@ -23,7 +23,7 @@
 
 ### Usage
 - Open a terminal window by typing `Ctrl + Shift + P`,  
-and type **`I want to Rubber-Duck!`**.
+and type **`I want to see Rubber-Duck!`**.
 
 - That's it. Now a cute rubber duck will dance in your editor.
 
