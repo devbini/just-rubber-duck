@@ -1,9 +1,27 @@
 # Change Log
 
-All notable changes to the "just-rubber-duck" extension will be documented in this file.
+버전 네이밍은 다음과 같이 진행됩니다.
+> **v x.y.z**
+> - **x** : 큰 변화 (Major)  
+> - **y** : 기능 개선 및 추가 (Minor)  
+> - **z** : 버그 수정 및 문서 변경 (Patch)  
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+---
 
-## [Unreleased]
+## [v0.0.3] - 2025-03-18  
+### 🔄 변경  
+- 지원하는 VSCode의 최소 버전이 **1.74.0 이상**으로 변경되었습니다.
+    - 테마 인식을 통한 배경색 설정이 1.74.0 이상부터 지원됩니다.
 
-- Initial release
+---
+
+## [v0.0.2] - 2025-03-17  
+### 🔄 변경  
+- 확장 프로그램의 **아이콘 및 설명**이 수정되었습니다.  
+- **README 문서 업데이트**  
+
+---
+
+## [v0.0.1] - 2025-03-15  
+### 🚀 첫 릴리즈  
+- `"I want to see Rubber-Duck!"` 명령어 추가

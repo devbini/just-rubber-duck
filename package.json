@@ -2,10 +2,10 @@
   "name": "just-rubber-duck",
   "displayName": "Just Rubber Duck",
   "description": "Rubber Duck Provides a rubber duck debugging.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "devbini",
   "engines": {
-    "vscode": "^1.98.0"
+    "vscode": ">=1.74.0"
   },
   "categories": [
     "Other"
@@ -60,7 +60,7 @@
     "@types/assert": "^1.5.11",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
-    "@types/vscode": "^1.98.0",
+    "@types/vscode": ">=1.74.0",
     "@typescript-eslint/eslint-plugin": "^8.25.0",
     "@typescript-eslint/parser": "^8.25.0",
     "@vscode/test-cli": "^0.0.10",
