@@ -1,7 +1,7 @@
 {
   "name": "just-rubber-duck",
   "displayName": "Just Rubber Duck",
-  "description": "Extension to help you code with Rubberduck",
+  "description": "Rubber Duck Provides a rubber duck debugging.",
   "version": "0.0.2",
   "publisher": "devbini",
   "engines": {
@@ -10,7 +10,7 @@
   "categories": [
     "Other"
   ],
-  "icon": "media/rubberduck.png",
+  "icon": "resource/rubberduck.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/devbini/just-rubber-duck.git"
@@ -34,7 +34,7 @@
         {
           "id": "duckContainer",
           "title": "Rubber Duck",
-          "icon": "media/rubberduck.svg"
+          "icon": "resource/rubberduck.svg"
         }
       ]
     },
@@ -57,6 +57,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
+    "@types/assert": "^1.5.11",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
     "@types/vscode": "^1.98.0",
