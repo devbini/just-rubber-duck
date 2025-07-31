@@ -5,6 +5,13 @@ let installUri: vscode.Uri;
 export function activate(context: vscode.ExtensionContext) {
   installUri = context.extensionUri;
 
+  const duckImages = ["rubberduck-3d.png",
+    "rubberduck-cowboy.png",
+    "rubberduck-hoodie.png",
+    "rubberduck-men.png",
+    "rubberduck-police.png"
+  ];
+
   // 테마별 배경 색 설정 (Sync vscode Theme)
   const activeTheme = vscode.window.activeColorTheme;
   let bgColor = "#1e1e1e";
@@ -29,16 +36,41 @@ export function activate(context: vscode.ExtensionContext) {
       await vscode.commands.executeCommand("rubberduck_view.focus");
     }
   );
+
+  const changeDuckImageCommand = vscode.commands.registerCommand(
+    "extension.changeDuckImage",
+    async () => {
+      duckProvider.changeDuckImage(duckImages[Math.floor(Math.random() * duckImages.length)]);
+    }
+  );
+
+  context.subscriptions.push(changeDuckImageCommand);
   context.subscriptions.push(openDuckCommand);
 }
 
-export function deactivate() {}
+export function deactivate() { }
 
 class RubberDuckProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "rubberduck_view";
   private webviewView?: vscode.WebviewView;
+  private currentImage: string;
 
-  constructor(private backgroundColor: string) {}
+  constructor(private backgroundColor: string) {
+    this.currentImage = "rubberduck.png";
+  }
+
+  public changeDuckImage(imageFileName: string) {
+    this.currentImage = imageFileName;
+    if (this.webviewView) {
+      const duckImagePath = vscode.Uri.joinPath(
+        installUri,
+        "resource",
+        this.currentImage
+      );
+      const duckImageUri = this.webviewView.webview.asWebviewUri(duckImagePath);
+      this.webviewView.webview.html = this.generateHTML(duckImageUri, this.backgroundColor);
+    }
+  }
 
   public resolveWebviewView(
     view: vscode.WebviewView,

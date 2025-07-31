@@ -27,6 +27,10 @@
       {
         "command": "extension.openRubberDuckView",
         "title": "I want to see Rubber-Duck!"
+      },
+      {
+        "command": "extension.changeDuckImage",
+        "title": "Change Rubber-Duck!"
       }
     ],
     "viewsContainers": {
