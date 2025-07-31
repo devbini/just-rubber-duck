@@ -36,8 +36,22 @@ export function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(openDuckCommand);
 
+  const setDuckBgColor = vscode.commands.registerCommand(
+    "extension.setDuckBgColor", async () => {
+      const color = await vscode.window.showInputBox({
+        prompt: "BackGround Color... (ex: #ffcc00, red, rgb(30,40,50) ...)",
+        placeHolder: bgColor
+      });
+      if (color) {
+        duckProvider.setBackgroundColor(color);
+      }
+    }
+  );
+  context.subscriptions.push(setDuckBgColor);
+
+  //#region [러버덕 애니메이션 관련 명령어]
   const stopDuckAnimation = vscode.commands.registerCommand(
-    "extension.stopDuckAnimation", () => duckProvider.setAnimation(false)    
+    "extension.stopDuckAnimation", () => duckProvider.setAnimation(false)
   );
   context.subscriptions.push(stopDuckAnimation);
 
@@ -66,6 +80,9 @@ export function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(duckSpeedHighFast);
 
+  //#endregion
+
+  //#region [러버덕 모델 관련 명령어]
   const setDuckNormal = vscode.commands.registerCommand(
     "extension.setDuck", () => duckProvider.changeDuckImage("rubberduck.png")
   );
@@ -96,6 +113,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(changeDuckImageCommand);
   //#endregion
+  //#endregion
 }
 
 export function deactivate() { }
@@ -106,7 +124,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
   private currentImage: string;
   private animate: boolean = true;
   private animationDuration: number = 1;
-  
+
   constructor(private backgroundColor: string) {
     this.currentImage = "rubberduck.png";
   }
@@ -129,6 +147,12 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
     this.refresh();
   }
 
+  // 배경 색상 변경
+  public setBackgroundColor(color: string) {
+    this.backgroundColor = color;
+    this.refresh();
+  }
+
   // 새로고침
   private refresh() {
     if (this.webviewView) {
@@ -141,7 +165,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
       this.webviewView.webview.html = this.generateHTML(duckImageUri, this.backgroundColor);
     }
   }
-    
+
   public resolveWebviewView(
     view: vscode.WebviewView,
     _context: vscode.WebviewViewResolveContext,
@@ -177,7 +201,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
                   padding: 0;
                   width: 100%;
                   height: 100%;
-                  background-color: ${bgColor};
+                background-color: ${bgColor ?? this.backgroundColor};
                   display: flex;
                   justify-content: center;
                   align-items: center;

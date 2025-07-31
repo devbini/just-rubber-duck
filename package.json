@@ -52,6 +52,7 @@
         "command": "extension.duckSpeedHighFast",
         "title": "Rubber Duck: MORE SPEED!!!"
       },
+      {
         "command": "extension.setDuck",
         "title": "Rubber Duck: Normal"
       },
@@ -74,6 +75,10 @@
       {
         "command": "extension.setDuckRandom",
         "title": "Rubber Duck: Random"
+      },
+      {
+        "command": "extension.setDuckBgColor",
+        "title": "Rubber Duck: Set Background Color"
       }
     ],
     "viewsContainers": {
