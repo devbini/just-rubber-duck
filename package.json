@@ -2,7 +2,7 @@
   "name": "just-rubber-duck",
   "displayName": "Just Rubber Duck",
   "description": "Rubber Duck Provides a rubber duck debugging.",
-  "version": "0.0.3",
+  "version": "1.0.1",
   "publisher": "devbini",
   "engines": {
     "vscode": ">=1.74.0"
@@ -27,6 +27,58 @@
       {
         "command": "extension.openRubberDuckView",
         "title": "I want to see Rubber-Duck!"
+      },
+      {
+        "command": "extension.startDuckAnimation",
+        "title": "Start Dance!"
+      },
+      {
+        "command": "extension.stopDuckAnimation",
+        "title": "Stop Move!"
+      },
+      {
+        "command": "extension.duckSpeedSlow",
+        "title": "Rubber Duck: Speed Slow!"
+      },
+      {
+        "command": "extension.duckSpeedNormal",
+        "title": "Rubber Duck: Speed Normal!"
+      },
+      {
+        "command": "extension.duckSpeedFast",
+        "title": "Rubber Duck: Speed Fast!"
+      },
+      {
+        "command": "extension.duckSpeedHighFast",
+        "title": "Rubber Duck: MORE SPEED!!!"
+      },
+      {
+        "command": "extension.setDuck",
+        "title": "Rubber Duck: Normal Theme"
+      },
+      {
+        "command": "extension.setDuckCowboy",
+        "title": "Rubber Duck: Cowboy Theme"
+      },
+      {
+        "command": "extension.setDuckHoodie",
+        "title": "Rubber Duck: Hoodie Theme"
+      },
+      {
+        "command": "extension.setDuckMen",
+        "title": "Rubber Duck: Suit Theme"
+      },
+      {
+        "command": "extension.setDuckPolice",
+        "title": "Rubber Duck: Police Theme"
+      },
+      {
+        "command": "extension.setDuckRandom",
+        "title": "Rubber Duck: Random Theme"
+      },
+      {
+        "command": "extension.setDuckBgColor",
+        "title": "Rubber Duck: Set Background Color"
       }
     ],
     "viewsContainers": {

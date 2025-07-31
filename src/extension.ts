@@ -5,6 +5,14 @@ let installUri: vscode.Uri;
 export function activate(context: vscode.ExtensionContext) {
   installUri = context.extensionUri;
 
+  const duckImages = [
+    "rubberduck.png",
+    "rubberduck-cowboy.png",
+    "rubberduck-hoodie.png",
+    "rubberduck-suit.png",
+    "rubberduck-police.png"
+  ];
+
   // 테마별 배경 색 설정 (Sync vscode Theme)
   const activeTheme = vscode.window.activeColorTheme;
   let bgColor = "#1e1e1e";
@@ -22,23 +30,141 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-  // 커맨드 등록
+  //#region [Command 등록]
   const openDuckCommand = vscode.commands.registerCommand(
-    "extension.openRubberDuckView",
-    async () => {
-      await vscode.commands.executeCommand("rubberduck_view.focus");
-    }
+    "extension.openRubberDuckView", async () => await vscode.commands.executeCommand("rubberduck_view.focus")
   );
   context.subscriptions.push(openDuckCommand);
+
+  const setDuckBgColor = vscode.commands.registerCommand(
+    "extension.setDuckBgColor", async () => {
+      const color = await vscode.window.showInputBox({
+        prompt: "BackGround Color... (ex: #ffcc00, red, rgb(30,40,50) ...)",
+        placeHolder: bgColor
+      });
+      if (color) {
+        duckProvider.setBackgroundColor(color);
+      }
+    }
+  );
+  context.subscriptions.push(setDuckBgColor);
+
+  //#region [러버덕 애니메이션 관련 명령어]
+  const stopDuckAnimation = vscode.commands.registerCommand(
+    "extension.stopDuckAnimation", () => duckProvider.setAnimation(false)
+  );
+  context.subscriptions.push(stopDuckAnimation);
+
+  const startDuckAnimation = vscode.commands.registerCommand(
+    "extension.startDuckAnimation", () => duckProvider.setAnimation(true)
+  );
+  context.subscriptions.push(startDuckAnimation);
+
+  const duckSpeedSlow = vscode.commands.registerCommand(
+    "extension.duckSpeedSlow", () => duckProvider.setAnimationDuration(2)
+  );
+  context.subscriptions.push(duckSpeedSlow);
+
+  const duckSpeedNormal = vscode.commands.registerCommand(
+    "extension.duckSpeedNormal", () => duckProvider.setAnimationDuration(1)
+  );
+  context.subscriptions.push(duckSpeedNormal);
+
+  const duckSpeedFast = vscode.commands.registerCommand(
+    "extension.duckSpeedFast", () => duckProvider.setAnimationDuration(0.5)
+  );
+  context.subscriptions.push(duckSpeedFast);
+
+  const duckSpeedHighFast = vscode.commands.registerCommand(
+    "extension.duckSpeedHighFast", () => duckProvider.setAnimationDuration(0.1)
+  );
+  context.subscriptions.push(duckSpeedHighFast);
+
+  //#endregion
+
+  //#region [러버덕 모델 관련 명령어]
+  const setDuckNormal = vscode.commands.registerCommand(
+    "extension.setDuck", () => duckProvider.changeDuckImage("rubberduck.png")
+  );
+  context.subscriptions.push(setDuckNormal);
+
+  const setDuckCowboy = vscode.commands.registerCommand(
+    "extension.setDuckCowboy", () => duckProvider.changeDuckImage("rubberduck-cowboy.png")
+  );
+  context.subscriptions.push(setDuckCowboy);
+
+  const setDuckHoodie = vscode.commands.registerCommand(
+    "extension.setDuckHoodie", () => duckProvider.changeDuckImage("rubberduck-hoodie.png")
+  );
+  context.subscriptions.push(setDuckHoodie);
+
+  const setDuckMen = vscode.commands.registerCommand(
+    "extension.setDuckMen", () => duckProvider.changeDuckImage("rubberduck-suit.png")
+  );
+  context.subscriptions.push(setDuckMen);
+
+  const setDuckPolice = vscode.commands.registerCommand(
+    "extension.setDuckPolice", () => duckProvider.changeDuckImage("rubberduck-police.png")
+  );
+  context.subscriptions.push(setDuckPolice);
+
+  const changeDuckImageCommand = vscode.commands.registerCommand(
+    "extension.setDuckRandom", () => duckProvider.changeDuckImage(duckImages[Math.floor(Math.random() * duckImages.length)])
+  );
+  context.subscriptions.push(changeDuckImageCommand);
+  //#endregion
+  //#endregion
 }
 
-export function deactivate() {}
+export function deactivate() { }
 
 class RubberDuckProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "rubberduck_view";
   private webviewView?: vscode.WebviewView;
+  private currentImage: string;
+  private animate: boolean = true;
+  private animationDuration: number = 1;
 
-  constructor(private backgroundColor: string) {}
+  constructor(private backgroundColor: string) {
+    this.currentImage = "rubberduck.png";
+  }
+
+  // 러버덕 움직임 여부
+  public setAnimation(enabled: boolean) {
+    this.animate = enabled;
+    this.refresh();
+  }
+
+  // 러버덕 움직임 속도 조절
+  public setAnimationDuration(duration: number) {
+    this.animationDuration = duration;
+    this.refresh();
+  }
+
+  // 러버덕 이미지 변경
+  public changeDuckImage(imageFileName: string) {
+    this.currentImage = imageFileName;
+    this.refresh();
+  }
+
+  // 배경 색상 변경
+  public setBackgroundColor(color: string) {
+    this.backgroundColor = color;
+    this.refresh();
+  }
+
+  // 새로고침
+  private refresh() {
+    if (this.webviewView) {
+      const duckImagePath = vscode.Uri.joinPath(
+        installUri,
+        "resource",
+        this.currentImage
+      );
+      const duckImageUri = this.webviewView.webview.asWebviewUri(duckImagePath);
+      this.webviewView.webview.html = this.generateHTML(duckImageUri, this.backgroundColor);
+    }
+  }
 
   public resolveWebviewView(
     view: vscode.WebviewView,
@@ -75,7 +201,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
                   padding: 0;
                   width: 100%;
                   height: 100%;
-                  background-color: ${bgColor};
+                background-color: ${bgColor ?? this.backgroundColor};
                   display: flex;
                   justify-content: center;
                   align-items: center;
@@ -83,7 +209,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
               img {
                   max-width: 90%;
                   max-height: 90%;
-                  animation: waddle 1s infinite ease-in-out;
+                  ${this.animate ? `animation: waddle ${this.animationDuration}s infinite ease-in-out;` : ''}
                   transform-origin: bottom center;
               }
               @keyframes waddle {
