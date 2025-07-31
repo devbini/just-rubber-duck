@@ -2,7 +2,7 @@
   "name": "just-rubber-duck",
   "displayName": "Just Rubber Duck",
   "description": "Rubber Duck Provides a rubber duck debugging.",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "publisher": "devbini",
   "engines": {
     "vscode": ">=1.74.0"
