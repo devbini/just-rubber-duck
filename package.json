@@ -52,6 +52,7 @@
         "command": "extension.duckSpeedHighFast",
         "title": "Rubber Duck: MORE SPEED!!!"
       },
+      {
         "command": "extension.setDuck",
         "title": "Rubber Duck: Normal"
       },

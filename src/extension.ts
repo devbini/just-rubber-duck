@@ -36,8 +36,9 @@ export function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(openDuckCommand);
 
+  //#region [러버덕 애니메이션 관련 명령어]
   const stopDuckAnimation = vscode.commands.registerCommand(
-    "extension.stopDuckAnimation", () => duckProvider.setAnimation(false)    
+    "extension.stopDuckAnimation", () => duckProvider.setAnimation(false)
   );
   context.subscriptions.push(stopDuckAnimation);
 
@@ -66,6 +67,9 @@ export function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(duckSpeedHighFast);
 
+  //#endregion
+
+  //#region [러버덕 모델 관련 명령어]
   const setDuckNormal = vscode.commands.registerCommand(
     "extension.setDuck", () => duckProvider.changeDuckImage("rubberduck.png")
   );
@@ -96,6 +100,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(changeDuckImageCommand);
   //#endregion
+  //#endregion
 }
 
 export function deactivate() { }
@@ -106,7 +111,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
   private currentImage: string;
   private animate: boolean = true;
   private animationDuration: number = 1;
-  
+
   constructor(private backgroundColor: string) {
     this.currentImage = "rubberduck.png";
   }
@@ -141,7 +146,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
       this.webviewView.webview.html = this.generateHTML(duckImageUri, this.backgroundColor);
     }
   }
-    
+
   public resolveWebviewView(
     view: vscode.WebviewView,
     _context: vscode.WebviewViewResolveContext,
