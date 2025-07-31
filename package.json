@@ -27,6 +27,14 @@
       {
         "command": "extension.openRubberDuckView",
         "title": "I want to see Rubber-Duck!"
+      },
+      {
+        "command": "extension.stopDuckAnimation",
+        "title": "Stop Move!"
+      },
+      {
+        "command": "extension.startDuckAnimation",
+        "title": "Start Dance!"
       }
     ],
     "viewsContainers": {

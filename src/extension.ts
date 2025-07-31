@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-  // 커맨드 등록
+  //#region [Command 등록]
   const openDuckCommand = vscode.commands.registerCommand(
     "extension.openRubberDuckView",
     async () => {
@@ -30,15 +30,47 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
   context.subscriptions.push(openDuckCommand);
+
+  const stopDuckAnimation = vscode.commands.registerCommand(
+    "extension.stopDuckAnimation",
+    () => {
+      duckProvider.setAnimation(false);
+    }
+  );
+  context.subscriptions.push(stopDuckAnimation);
+
+  const startDuckAnimation = vscode.commands.registerCommand(
+    "extension.startDuckAnimation",
+    () => {
+      duckProvider.setAnimation(true);
+    }
+  );
+  context.subscriptions.push(startDuckAnimation);
+  //#endregion
 }
 
-export function deactivate() {}
+export function deactivate() { }
 
 class RubberDuckProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "rubberduck_view";
   private webviewView?: vscode.WebviewView;
+  private animate: boolean = true;
 
-  constructor(private backgroundColor: string) {}
+  constructor(private backgroundColor: string) { }
+
+  public setAnimation(enabled: boolean) {
+    this.animate = enabled;
+    if (this.webviewView) {
+      const duckImagePath = vscode.Uri.joinPath(
+        installUri,
+        "resource",
+        "rubberduck.png"
+      );
+      const duckImageUri = this.webviewView.webview.asWebviewUri(duckImagePath);
+
+      this.webviewView.webview.html = this.generateHTML(duckImageUri, this.backgroundColor);
+    }
+  }
 
   public resolveWebviewView(
     view: vscode.WebviewView,
@@ -83,7 +115,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
               img {
                   max-width: 90%;
                   max-height: 90%;
-                  animation: waddle 1s infinite ease-in-out;
+                  ${this.animate ? 'animation: waddle 1s infinite ease-in-out;' : ''}
                   transform-origin: bottom center;
               }
               @keyframes waddle {
