@@ -60,6 +60,10 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
 
   public setAnimation(enabled: boolean) {
     this.animate = enabled;
+    this.refresh();
+  }
+
+  private refresh() {
     if (this.webviewView) {
       const duckImagePath = vscode.Uri.joinPath(
         installUri,
@@ -67,7 +71,6 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
         "rubberduck.png"
       );
       const duckImageUri = this.webviewView.webview.asWebviewUri(duckImagePath);
-
       this.webviewView.webview.html = this.generateHTML(duckImageUri, this.backgroundColor);
     }
   }
