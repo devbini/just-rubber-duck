@@ -29,24 +29,24 @@
         "title": "I want to see Rubber-Duck!"
       },
       {
-        "command": "extension.stopDuckAnimation",
-        "title": "Stop Move!"
-      },
-      {
         "command": "extension.startDuckAnimation",
         "title": "Start Dance!"
       },
       {
+        "command": "extension.stopDuckAnimation",
+        "title": "Stop Move!"
+      },
+      {
         "command": "extension.duckSpeedSlow",
-        "title": "Rubber Duck: Slow!"
+        "title": "Rubber Duck: Speed Slow!"
       },
       {
         "command": "extension.duckSpeedNormal",
-        "title": "Rubber Duck: Normal!"
+        "title": "Rubber Duck: Speed Normal!"
       },
       {
         "command": "extension.duckSpeedFast",
-        "title": "Rubber Duck: Fast!"
+        "title": "Rubber Duck: Speed Fast!"
       },
       {
         "command": "extension.duckSpeedHighFast",
@@ -54,27 +54,27 @@
       },
       {
         "command": "extension.setDuck",
-        "title": "Rubber Duck: Normal"
+        "title": "Rubber Duck: Normal Theme"
       },
       {
         "command": "extension.setDuckCowboy",
-        "title": "Rubber Duck: Cowboy"
+        "title": "Rubber Duck: Cowboy Theme"
       },
       {
         "command": "extension.setDuckHoodie",
-        "title": "Rubber Duck: Hoodie"
+        "title": "Rubber Duck: Hoodie Theme"
       },
       {
         "command": "extension.setDuckMen",
-        "title": "Rubber Duck: Suit"
+        "title": "Rubber Duck: Suit Theme"
       },
       {
         "command": "extension.setDuckPolice",
-        "title": "Rubber Duck: Police"
+        "title": "Rubber Duck: Police Theme"
       },
       {
         "command": "extension.setDuckRandom",
-        "title": "Rubber Duck: Random"
+        "title": "Rubber Duck: Random Theme"
       },
       {
         "command": "extension.setDuckBgColor",
