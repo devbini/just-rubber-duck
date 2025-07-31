@@ -24,28 +24,40 @@ export function activate(context: vscode.ExtensionContext) {
 
   //#region [Command 등록]
   const openDuckCommand = vscode.commands.registerCommand(
-    "extension.openRubberDuckView",
-    async () => {
-      await vscode.commands.executeCommand("rubberduck_view.focus");
-    }
+    "extension.openRubberDuckView", async () => await vscode.commands.executeCommand("rubberduck_view.focus")    
   );
   context.subscriptions.push(openDuckCommand);
 
   const stopDuckAnimation = vscode.commands.registerCommand(
-    "extension.stopDuckAnimation",
-    () => {
-      duckProvider.setAnimation(false);
-    }
+    "extension.stopDuckAnimation", () => duckProvider.setAnimation(false)    
   );
   context.subscriptions.push(stopDuckAnimation);
 
   const startDuckAnimation = vscode.commands.registerCommand(
-    "extension.startDuckAnimation",
-    () => {
-      duckProvider.setAnimation(true);
-    }
+    "extension.startDuckAnimation", () => duckProvider.setAnimation(true)
   );
   context.subscriptions.push(startDuckAnimation);
+
+  const duckSpeedSlow = vscode.commands.registerCommand(
+    "extension.duckSpeedSlow", () => duckProvider.setAnimationDuration(2)
+  );
+  context.subscriptions.push(duckSpeedSlow);
+
+  const duckSpeedNormal = vscode.commands.registerCommand(
+    "extension.duckSpeedNormal", () => duckProvider.setAnimationDuration(1)
+  );
+  context.subscriptions.push(duckSpeedNormal);
+
+  const duckSpeedFast = vscode.commands.registerCommand(
+    "extension.duckSpeedFast", () => duckProvider.setAnimationDuration(0.5)
+  );
+  context.subscriptions.push(duckSpeedFast);
+
+  const duckSpeedHighFast = vscode.commands.registerCommand(
+    "extension.duckSpeedHighFast", () => duckProvider.setAnimationDuration(0.1)
+  );
+  context.subscriptions.push(duckSpeedHighFast);
+
   //#endregion
 }
 
@@ -55,11 +67,19 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "rubberduck_view";
   private webviewView?: vscode.WebviewView;
   private animate: boolean = true;
+  private animationDuration: number = 1;
 
   constructor(private backgroundColor: string) { }
 
+  // 러버덕 움직임 여부
   public setAnimation(enabled: boolean) {
     this.animate = enabled;
+    this.refresh();
+  }
+
+  // 러버덕 움직임 속도 조절
+  public setAnimationDuration(duration: number) {
+    this.animationDuration = duration;
     this.refresh();
   }
 
@@ -118,7 +138,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
               img {
                   max-width: 90%;
                   max-height: 90%;
-                  ${this.animate ? 'animation: waddle 1s infinite ease-in-out;' : ''}
+                  ${this.animate ? `animation: waddle ${this.animationDuration}s infinite ease-in-out;` : ''}
                   transform-origin: bottom center;
               }
               @keyframes waddle {

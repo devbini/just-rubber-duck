@@ -35,6 +35,22 @@
       {
         "command": "extension.startDuckAnimation",
         "title": "Start Dance!"
+      },
+      {
+        "command": "extension.duckSpeedSlow",
+        "title": "Rubber Duck - Slow!"
+      },
+      {
+        "command": "extension.duckSpeedNormal",
+        "title": "Rubber Duck - Normal!"
+      },
+      {
+        "command": "extension.duckSpeedFast",
+        "title": "Rubber Duck - Fast!"
+      },
+      {
+        "command": "extension.duckSpeedHighFast",
+        "title": "Rubber Duck - MORE SPEED!!!"
       }
     ],
     "viewsContainers": {
