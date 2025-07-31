@@ -27,6 +27,30 @@
       {
         "command": "extension.openRubberDuckView",
         "title": "I want to see Rubber-Duck!"
+      },
+      {
+        "command": "extension.setDuck",
+        "title": "Rubber Duck: Normal"
+      },
+      {
+        "command": "extension.setDuckCowboy",
+        "title": "Rubber Duck: Cowboy"
+      },
+      {
+        "command": "extension.setDuckHoodie",
+        "title": "Rubber Duck: Hoodie"
+      },
+      {
+        "command": "extension.setDuckMen",
+        "title": "Rubber Duck: Suit"
+      },
+      {
+        "command": "extension.setDuckPolice",
+        "title": "Rubber Duck: Police"
+      },
+      {
+        "command": "extension.setDuckRandom",
+        "title": "Rubber Duck: Random"
       }
     ],
     "viewsContainers": {
