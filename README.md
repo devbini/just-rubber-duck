@@ -3,7 +3,7 @@
 **오로지 당신의 디버깅을 위한 귀엽고 단순한 러버덕!**  
 Rubber Duck debugging을 시각적으로 도와주는 VS Code 확장 프로그램입니다.
 
-<img width="1194" height="791" alt="image" src="https://github.com/user-attachments/assets/fd6717aa-1ded-4ed2-a03d-b099acfb08b0" />
+![Demo GIF](https://raw.githubusercontent.com/devbini/just-rubber-duck/main/Images/demomv.gif)
 
 ---
 
@@ -20,7 +20,7 @@ Rubber Duck debugging을 시각적으로 도와주는 VS Code 확장 프로그�
 1. **`Ctrl + Shift + P` 를 눌러 명령어 팔레트를 엽니다.**
 2. `I want to see Rubber-Duck!` 명령어를 실행합니다.
 
-![image](https://github.com/user-attachments/assets/0bfc3d17-8c8a-45a8-a495-1a9940068667)
+![Guide](https://raw.githubusercontent.com/devbini/just-rubber-duck/main/Images/demo2.png)
 
 - 그게 끝입니다! 이제 귀여운 러버덕이 에디터에서 춤을 춥니다.
 
@@ -77,7 +77,7 @@ Just Rubber Duck is a visual and interactive Rubber Duck Debugging assistant for
 1. Press `Ctrl + Shift + P` to open the command palette.
 2. Search and run **`I want to see Rubber-Duck!`**.
 
-![image](https://github.com/user-attachments/assets/0bfc3d17-8c8a-45a8-a495-1a9940068667)
+![Guide](https://raw.githubusercontent.com/devbini/just-rubber-duck/main/Images/demo2.png)
 
 That’s it — the cute rubber duck will start dancing in your editor!
 
@@ -112,3 +112,5 @@ That’s it — the cute rubber duck will start dancing in your editor!
 
 ---
 📦 [Marketplace](https://marketplace.visualstudio.com/items?itemName=devbini.just-rubber-duck) | 🐙 [GitHub 저장소](https://github.com/devbini/just-rubber-duck) | 🪪 License: MIT
+
+![Demo Img](https://raw.githubusercontent.com/devbini/just-rubber-duck/main/Images/demo.png)
