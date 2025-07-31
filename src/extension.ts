@@ -30,16 +30,46 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 
-  // 커맨드 등록
+  //#region [Command 등록]
   const openDuckCommand = vscode.commands.registerCommand(
     "extension.openRubberDuckView", async () => await vscode.commands.executeCommand("rubberduck_view.focus")
   );
   context.subscriptions.push(openDuckCommand);
 
-  const setDuck = vscode.commands.registerCommand(
-    "extension.setDuck3D", () => duckProvider.changeDuckImage("rubberduck.png")
+  const stopDuckAnimation = vscode.commands.registerCommand(
+    "extension.stopDuckAnimation", () => duckProvider.setAnimation(false)    
   );
-  context.subscriptions.push(setDuck);
+  context.subscriptions.push(stopDuckAnimation);
+
+  const startDuckAnimation = vscode.commands.registerCommand(
+    "extension.startDuckAnimation", () => duckProvider.setAnimation(true)
+  );
+  context.subscriptions.push(startDuckAnimation);
+
+  const duckSpeedSlow = vscode.commands.registerCommand(
+    "extension.duckSpeedSlow", () => duckProvider.setAnimationDuration(2)
+  );
+  context.subscriptions.push(duckSpeedSlow);
+
+  const duckSpeedNormal = vscode.commands.registerCommand(
+    "extension.duckSpeedNormal", () => duckProvider.setAnimationDuration(1)
+  );
+  context.subscriptions.push(duckSpeedNormal);
+
+  const duckSpeedFast = vscode.commands.registerCommand(
+    "extension.duckSpeedFast", () => duckProvider.setAnimationDuration(0.5)
+  );
+  context.subscriptions.push(duckSpeedFast);
+
+  const duckSpeedHighFast = vscode.commands.registerCommand(
+    "extension.duckSpeedHighFast", () => duckProvider.setAnimationDuration(0.1)
+  );
+  context.subscriptions.push(duckSpeedHighFast);
+
+  const setDuckNormal = vscode.commands.registerCommand(
+    "extension.setDuck", () => duckProvider.changeDuckImage("rubberduck.png")
+  );
+  context.subscriptions.push(setDuckNormal);
 
   const setDuckCowboy = vscode.commands.registerCommand(
     "extension.setDuckCowboy", () => duckProvider.changeDuckImage("rubberduck-cowboy.png")
@@ -65,6 +95,7 @@ export function activate(context: vscode.ExtensionContext) {
     "extension.setDuckRandom", () => duckProvider.changeDuckImage(duckImages[Math.floor(Math.random() * duckImages.length)])
   );
   context.subscriptions.push(changeDuckImageCommand);
+  //#endregion
 }
 
 export function deactivate() { }
@@ -73,13 +104,33 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "rubberduck_view";
   private webviewView?: vscode.WebviewView;
   private currentImage: string;
-
+  private animate: boolean = true;
+  private animationDuration: number = 1;
+  
   constructor(private backgroundColor: string) {
     this.currentImage = "rubberduck.png";
   }
 
+  // 러버덕 움직임 여부
+  public setAnimation(enabled: boolean) {
+    this.animate = enabled;
+    this.refresh();
+  }
+
+  // 러버덕 움직임 속도 조절
+  public setAnimationDuration(duration: number) {
+    this.animationDuration = duration;
+    this.refresh();
+  }
+
+  // 러버덕 이미지 변경
   public changeDuckImage(imageFileName: string) {
     this.currentImage = imageFileName;
+    this.refresh();
+  }
+
+  // 새로고침
+  private refresh() {
     if (this.webviewView) {
       const duckImagePath = vscode.Uri.joinPath(
         installUri,
@@ -90,7 +141,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
       this.webviewView.webview.html = this.generateHTML(duckImageUri, this.backgroundColor);
     }
   }
-
+    
   public resolveWebviewView(
     view: vscode.WebviewView,
     _context: vscode.WebviewViewResolveContext,
@@ -134,7 +185,7 @@ class RubberDuckProvider implements vscode.WebviewViewProvider {
               img {
                   max-width: 90%;
                   max-height: 90%;
-                  animation: waddle 1s infinite ease-in-out;
+                  ${this.animate ? `animation: waddle ${this.animationDuration}s infinite ease-in-out;` : ''}
                   transform-origin: bottom center;
               }
               @keyframes waddle {
