@@ -75,6 +75,10 @@
       {
         "command": "extension.setDuckRandom",
         "title": "Rubber Duck: Random"
+      },
+      {
+        "command": "extension.setDuckBgColor",
+        "title": "Rubber Duck: Set Background Color"
       }
     ],
     "viewsContainers": {
